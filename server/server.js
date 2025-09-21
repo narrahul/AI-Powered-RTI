@@ -22,6 +22,10 @@ app.use(cors({
 
 // Middleware
 app.use(express.json());
+app.use((req, res, next) => {
+  console.log(`[${new Date().toISOString()}] Incoming request: ${req.method} ${req.url}`);
+  next();
+});
 
 // Routes
 app.use('/api', aiRoutes); // Mount AI routes directly under /api
