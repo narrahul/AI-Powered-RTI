@@ -1,4 +1,4 @@
-const aiService = require('../services/aiService');
+const aiService = require('./aiService'); // Updated path
 
 // Generate RTI content
 const generateRTIContent = async (req, res) => {
@@ -26,7 +26,7 @@ RTI Query: ${query}
     const content = await aiService.generateRTIContent(subject, details, language);
     console.log('Generated content:', content);
     
-    res.json({ rtiApplication: content }); // Changed property name to rtiApplication
+    res.json({ rtiApplication: content });
   } catch (error) {
     console.error('Error generating RTI content:', {
       message: error.message,
@@ -36,32 +36,17 @@ RTI Query: ${query}
   }
 };
 
-// Suggest department and PIO (leaving as is for now, not used by new client App.js)
+// These are no longer used but kept for completeness if needed in the future
 const suggestDepartmentAndPIO = async (req, res) => {
-  try {
-    const { subject, details } = req.body;
-    const suggestions = await aiService.suggestDepartmentAndPIO(subject, details);
-    res.json(suggestions);
-  } catch (error) {
-    console.error('Error suggesting department and PIO:', error);
-    res.status(500).json({ message: 'Failed to suggest department and PIO' });
-  }
+  res.status(501).json({ message: 'Not implemented in AI-only mode' });
 };
 
-// Review and improve RTI content (leaving as is for now, not used by new client App.js)
 const reviewAndImproveRTI = async (req, res) => {
-  try {
-    const { content, language } = req.body;
-    const improvedContent = await aiService.reviewAndImproveRTI(content, language);
-    res.json({ content: improvedContent });
-  } catch (error) {
-    console.error('Error reviewing RTI content:', error);
-    res.status(500).json({ message: 'Failed to review RTI content' });
-  }
+  res.status(501).json({ message: 'Not implemented in AI-only mode' });
 };
 
 module.exports = {
   generateRTIContent,
   suggestDepartmentAndPIO,
   reviewAndImproveRTI
-}; 
+};
