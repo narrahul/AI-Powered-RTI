@@ -1,7 +1,6 @@
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
-const morgan = require('morgan'); // Keep morgan for logging in development
 
 // Log environment variables (safely)
 console.log('Environment check:');
@@ -23,7 +22,6 @@ app.use(cors({
 
 // Middleware
 app.use(express.json());
-app.use(morgan('dev'));
 
 // Routes
 app.use('/api', aiRoutes); // Mount AI routes directly under /api
